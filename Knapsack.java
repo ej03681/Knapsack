@@ -11,10 +11,14 @@ package edu.georgiasouthern.csci2410.csci2410datastructuresalgorithms;
 public class Knapsack {
 
     public static void main(String[] args) {
-        int[] assets = {1, 5, 10, 20, 50, 100};
+        int[] assets = new int[50];
         int[] rValsA = new int[100];
         int[] rValsB = new int[100];
         int W = 50;
+        
+        for (int i= 20, j = 0; i <= 1000; i+=20, j++){
+            assets[j] = i;
+        }
         for (int i = 0; i < 100; i++) {
             rValsA[i] = (int) Math.random() * 1000;
         }
@@ -27,24 +31,24 @@ public class Knapsack {
         System.arraycopy(rValsA, 0, firstHalfA, 0, rValsA.length / 2);
         System.arraycopy(rValsA, 50, secondHalfA, 0, 50);
         long startTime = System.nanoTime();
-        System.out.print("The difference between the the "
-                + "set partitions from the first initial set of assets is: "
+        System.out.println("The difference between the "
+                + "two set partitions of 100 random integers less than 1000 from the first initial set of assets is: "
                 + Math.abs(knapSack(W, assets, firstHalfA, firstHalfA.length) - knapSack(W, assets, secondHalfA,
                         secondHalfA.length)));
         long endTime = System.nanoTime();
-        System.out.print("It took " + (endTime - startTime) + " nanoseconds");
+        System.out.println("It took " + (endTime - startTime) + " nanoseconds");
 //PARTITION second initial set
         int[] firstHalfB = new int[50];
         int[] secondHalfB = new int[50];
         System.arraycopy(rValsB, 0, firstHalfB, 0, 50);
         System.arraycopy(rValsB, 50, secondHalfB, 0, 50);
         long startTimeB = System.nanoTime();
-        System.out.print("The difference between the the "
-                + "set partitions from the first initial set of assets is: "
+        System.out.println("The difference between the "
+                + "two set partitions of 100 random integers less than 10,000 from the first initial set of assets is: "
                 + Math.abs(knapSack(W, assets, firstHalfB, firstHalfB.length) - knapSack(W, assets, secondHalfB,
                         secondHalfA.length)));
         long endTimeB = System.nanoTime();
-        System.out.print("It took " + (endTimeB - startTimeB) + " nanoseconds");
+        System.out.println("It took " + (endTimeB - startTimeB) + " nanoseconds");
     }
 
     public static int knapSack(int W, int[] wt, int[] val, int n) {
